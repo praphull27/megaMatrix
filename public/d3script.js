@@ -55,7 +55,7 @@ d3.json("outputJSON/output.json", function(error, data) {
         }
     }
 
-    var threshold = 150;
+    var threshold = 10;
 
     var colorScaleForward = function(j) {
         var value = d3.scale.linear()
@@ -257,7 +257,16 @@ d3.json("outputJSON/output.json", function(error, data) {
         "column": function(d, i) {
             return d.col;
         }
-    });
+    })
+    .on('mouseover', function(d,i) {
+			d3.select(this).style({"stroke":"red","stroke-width":1});
+			d3.select("cell-selected-text").text(d.col + " -- " + d.value + " -- " + d.row);
+		})
+	.on('mouseout', function(d,i) {
+			d3.select(this).style({"stroke-width":0});
+			d3.select("cell-selected-text").text("");
+		});
+
     cellcover.append("g")
     .selectAll("text")
     .data(newdata.data)
@@ -266,10 +275,10 @@ d3.json("outputJSON/output.json", function(error, data) {
     .attr({
         "class": "cell-text",
         "x": function(d, i) {
-            return cellXPositionLin(indexXMapper(d.col)) + .02 * (cellXPosition.rangeBand());
+            return cellXPositionLin(indexXMapper(d.col)) + .03 * (cellXPosition.rangeBand());
         },
         "y": function(d, i) {
-            return cellYPositionLin(indexYMapper(d.row)) + .1 * (cellYPosition.rangeBand());
+            return cellYPositionLin(indexYMapper(d.row)) + .2 * (cellYPosition.rangeBand());
         },
     })
     .text(function(d) {
@@ -329,10 +338,10 @@ d3.json("outputJSON/output.json", function(error, data) {
 
             t.selectAll(".cell-text")
             .attr("x", function(d, i) {
-                return cellXPositionLin(indexXMapper(d.col)) + .02 * (cellXPosition.rangeBand());
+                return cellXPositionLin(indexXMapper(d.col)) + .03 * (cellXPosition.rangeBand());
             })
             .attr("y", function(d, i) {
-                return cellYPositionLin(indexYMapper(d.row)) + .1 * (cellYPosition.rangeBand());
+                return cellYPositionLin(indexYMapper(d.row)) + .2 * (cellYPosition.rangeBand());
             })
             .text(function(d) {
                 return d.value;
@@ -367,10 +376,10 @@ d3.json("outputJSON/output.json", function(error, data) {
 
             t.selectAll(".cell-text")
             .attr("x", function(d, i) {
-                return cellXPositionLin(indexXMapper(d.col)) + .02 * (cellXPosition.rangeBand());
+                return cellXPositionLin(indexXMapper(d.col)) + .03 * (cellXPosition.rangeBand());
             })
             .attr("y", function(d, i) {
-                return cellYPositionLin(indexYMapper(d.row)) + .1 * (cellYPosition.rangeBand());
+                return cellYPositionLin(indexYMapper(d.row)) + .2 * (cellYPosition.rangeBand());
             })
             .text(function(d) {
                 return d.value;

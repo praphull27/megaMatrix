@@ -1,55 +1,63 @@
 <!doctype html>
 <head>
-  <meta charset="utf-8">
-  <title>Test Env</title>
-  <style>
-    circle {
-      fill: #ffffff;
-      stroke: steelblue;
-      stroke-width: 1.5px;
-    }
-    .node {
-      font: 10px sans-serif;
-    }
-    .link {
-      fill: none;
-      stroke: #cccccc;
-      stroke-width: 1.5px;
-    }
+    <meta charset="utf-8">
+    <title>Test Env</title>
+    <style>
     .yAxis path,
     .yAxis line,
     .xAxis path,
     .xAxis line {
-      fill: none;
-      stroke: black;
-      shape-rendering: crispEdges;
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
     }
     .xAxis text,
     .yAxis text {
-      font-family: sans-serif;
-      font-size: 10px;
+        font-family: sans-serif;
+        font-size: 10px;
     }
     .cell-text-active {
-      font-family: sans-serif;
-      font-size: 1px;
-      fill: white;
+        font-family: sans-serif;
+        font-size: 1px;
+        fill: white;
     }
     .cell-text-disable {
-      font-family: sans-serif;
-      font-size: 0px;
-      fill: white;
+        font-family: sans-serif;
+        font-size: 0px;
+        fill: white;
     }
-  </style>
+    cell-selected-text {
+        font-family: sans-serif;
+        font-size: 20px;
+        position: fixed;
+        left: 1px;
+        bottom: 1px;
+    }
+    button {
+        position: fixed;
+        right: 1px;
+        bottom: 1px;
+        font: 15px sans-serif;
+        width: 65px;
+        height: 35px;
+        background-color: #33FF00;
+        -webkit-border-radius: 10px;
+        border: 3px solid #009900;
+        padding: 5px;
+    }
+    </style>
 </head>
 <body>
-  <script src="d3/d3.js" charset="utf-8"></script>
-  <script src="d3script.js" type="text/javascript"></script>
-  <p>Order:</p>
-  <select id="order">
+<script src="d3/d3.js" charset="utf-8"></script>
+<script src="d3script.js" type="text/javascript"></script>
+<p>Order:</p>
+<select id="order">
     <option value="">Select an option from Below</option>
     <option value="row">by Row Names</option>
     <option value="col">by Column Names</option>
-  </select>
-  <p>Built with <a href="http://d3js.org/">d3.js</a>.</p>
+</select>
+<p>Built with <a href="http://d3js.org/">d3.js</a>.</p>
+<cell-selected-text></cell-selected-text>
+<button onclick="history.go(0)">Refresh</button>
 </body>
 </html>
