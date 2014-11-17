@@ -4,11 +4,7 @@
   "description": "Mega Matrix for Dr. Coppola's Lab at UCLA.",
   "main": "server.js",
   "dependencies": {
-    "babyparse": "^0.2.1",
-    "connect": "^3.3.3",
-    "express": "^4.10.2",
-    "optimist": "^0.6.1",
-    "serve-static": "^1.7.1"
+    "express": "^4.10.2"
   },
   "devDependencies": {},
   "scripts": {
