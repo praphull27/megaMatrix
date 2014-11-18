@@ -5,8 +5,8 @@ scope.marginleft = 0;
 scope.marginright = 50;
 scope.margintop = 5;
 scope.marginbottom = 100;
-scope.width = 1200;
-scope.height = 600;
+scope.width = 2000;
+scope.height = 1200;
 
 d3.json("outputJSON/output.json", function(error, data) {
     if (error) {
