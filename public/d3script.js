@@ -55,7 +55,7 @@ d3.json("outputJSON/output.json", function(error, data) {
         }
     }
 
-    var threshold = 10;
+    var threshold = 150;
 
     var colorScaleForward = function(j) {
         var value = d3.scale.linear()
@@ -242,8 +242,9 @@ d3.json("outputJSON/output.json", function(error, data) {
             return cellYPositionLin(indexYMapper(d.row));
         },
         "fill": function(d) {
-            return "rgb(" + redColorControl(d.value, "red") + "," + greenColorControl(d.value, "red") + "," + blueColorControl(d.value, "red") + ")";
-
+            //return "rgb(" + redColorControl(d.value, "red") + "," + greenColorControl(d.value, "red") + "," + blueColorControl(d.value, "red") + ")";
+            return getColorD3(d.value);
+            //return "rgb(" + redColorControl(d.value, "red") + "," + greenColorControl(d.value, "red") + "," + blueColorControl(d.value, "blue") + ")";
         },
         "value": function(d) {
             return d.value;
@@ -258,14 +259,19 @@ d3.json("outputJSON/output.json", function(error, data) {
             return d.col;
         }
     })
-    .on('mouseover', function(d,i) {
-			d3.select(this).style({"stroke":"red","stroke-width":1});
-			d3.select("cell-selected-text").text(d.col + " -- " + d.value + " -- " + d.row);
-		})
-	.on('mouseout', function(d,i) {
-			d3.select(this).style({"stroke-width":0});
-			d3.select("cell-selected-text").text("");
-		});
+    .on('mouseover', function(d, i) {
+        d3.select(this).style({
+            "stroke": "red",
+            "stroke-width": 1
+        });
+        d3.select("cell-selected-text").text(d.col + " -- " + d.value + " -- " + d.row);
+    })
+    .on('mouseout', function(d, i) {
+        d3.select(this).style({
+            "stroke-width": 0
+        });
+        d3.select("cell-selected-text").text("");
+    });
 
     cellcover.append("g")
     .selectAll("text")
@@ -288,8 +294,6 @@ d3.json("outputJSON/output.json", function(error, data) {
         'cell-text-disable': true,
         'cell-text-active': false
     });
-
-
 
     vis.append("g").attr("class", "xAxis").attr("transform", "translate(0," + (margin.top + height) + ")")
     .call(xAxis)
@@ -384,6 +388,25 @@ d3.json("outputJSON/output.json", function(error, data) {
             .text(function(d) {
                 return d.value;
             });
+        }
+    }
+
+    function getColorD3(value) {
+        if (value < -10) {
+            value = 0;
+        }
+        if (checkFilterOutValue(value)) {
+            return "hsl(0,0%,93%)";
+        }
+        var r = d3.scale.linear().domain([-10, 50]).range([0, 255]);
+        return "hsl(" + r(value) + ",100%,50%)";
+    }
+
+    function checkFilterOutValue(value) {
+        if (value > 50) {
+            return true;
+        } else {
+            return false;
         }
     }
 });
